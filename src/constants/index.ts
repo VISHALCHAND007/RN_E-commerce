@@ -6,3 +6,8 @@ export const colors = {
     designColor: '#fbbf24', 
     btnColor: '#1d4ed8'
 }
+
+export  const URL = {
+    GET_PRODUCTS: 'https://jsonserver.reactbd.com/amazonpro',
+    
+}

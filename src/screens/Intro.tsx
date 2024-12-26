@@ -9,18 +9,11 @@ import {
 import React from 'react';
 import {introPng} from '../assets/index';
 import {colors} from '../constants';
-import {useNavigation} from '@react-navigation/native';
-
-import {StackNavigationProp} from '@react-navigation/stack';
-import { AuthStackItemList } from '../navigation/StackNavigation';
+import {NavigationProps} from '../navigation/StackNavigation';
 
 const {height} = Dimensions.get('window');
 
-type IntroScreenProps = {
-  navigation: StackNavigationProp<AuthStackItemList, 'Intro'>;
-};
-
-const Intro = ({navigation}: IntroScreenProps) => {
+const Intro = ({navigation}: NavigationProps) => {
   return (
     <View style={styles.container}>
       {/* Top */}
@@ -34,7 +27,9 @@ const Intro = ({navigation}: IntroScreenProps) => {
           Complete your style with awesome collections from bazaar
         </Text>
 
-        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate("Home")}>
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => navigation.navigate('Home')}>
           <Text style={styles.btnText}>Get Started</Text>
         </TouchableOpacity>
       </View>

@@ -3,7 +3,6 @@ import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import StackNavigation from './StackNavigation';
 import SideMenu from '../components/SideMenu';
-import { UseHandlerContext } from 'react-native-reanimated';
 
 export type DrawerItemList = {
   StackScreen: undefined

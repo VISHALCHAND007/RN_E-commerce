@@ -13,25 +13,30 @@ import {logo} from '../assets';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {DrawerItemList} from '../navigation/DrawerNavigator';
 import {useNavigation} from '@react-navigation/native';
+import {NavigationProps} from '../navigation/StackNavigation';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 type HeaderProps = DrawerNavigationProp<DrawerItemList>;
 
 const Header = () => {
-  const navigation = useNavigation<HeaderProps>();
+  const {navigation} = useNavigation<NavigationProps>();
+  const drawerNavigation = useNavigation<HeaderProps>();
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        <Pressable onPress={() => navigation.openDrawer()}>
+        <Pressable onPress={() => drawerNavigation.openDrawer()}>
           <Bars4Icon
             color={colors.textBlack}
             fill={colors.textBlack}
             size={20}
           />
         </Pressable>
-        <Pressable onPress={()=> navigation.navigate('')}>
+        <Pressable onPress={() => navigation.navigate('Home')}>
           <Image source={logo} alt="logo icon" style={styles.logo} />
         </Pressable>
-        <Pressable style={styles.cartIcon}>
+        <Pressable
+          style={styles.cartIcon}
+          onPress={() => navigation.navigate('Cart')}>
           <ShoppingCartIcon color={colors.textBlack} size={22} />
           <View style={styles.cartCount}>
             <Text style={styles.cartText}>0</Text>
@@ -51,7 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 15,
     paddingVertical: 10,
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.3,
     borderBlockColor: 'gray',
   },
   logo: {
