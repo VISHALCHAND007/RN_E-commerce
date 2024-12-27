@@ -10,6 +10,8 @@ export type DrawerItemList = {
 
 const Drawer = createDrawerNavigator();
 
+
+
 const DrawerNavigator = () => {
   return (
     <Drawer.Navigator

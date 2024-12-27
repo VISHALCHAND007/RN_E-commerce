@@ -16,7 +16,6 @@ import Carousel from 'react-native-reanimated-carousel';
 import {bannerOne, bannerThree, bannerTwo} from '../assets';
 import Loader from '../components/Loader';
 import {
-  ShoppingBagIcon,
   ShoppingCartIcon,
 } from 'react-native-heroicons/outline';
 import { useAnimatedHeaderHeight } from '@react-navigation/native-stack';
