@@ -19,7 +19,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 type HeaderProps = DrawerNavigationProp<DrawerItemList>;
 
 const Header = () => {
-  const {navigation} = useNavigation<NavigationProps>();
+  const navigation = useNavigation<NavigationProps>();
   const drawerNavigation = useNavigation<HeaderProps>();
   return (
     <SafeAreaView>

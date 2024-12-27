@@ -24,9 +24,9 @@ export type AuthStackItemList = {
 };
 
 const Stack = createNativeStackNavigator<AuthStackItemList>();
-export type NavigationProps = {
-  navigation: NativeStackNavigationProp<AuthStackItemList>;
-};
+
+export type NavigationProps =  NativeStackNavigationProp<AuthStackItemList>;
+
 
 const StackNavigation = () => {
   return (

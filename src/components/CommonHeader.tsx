@@ -7,7 +7,7 @@ import {NavigationProps} from '../navigation/StackNavigation';
 import {logo} from '../assets';
 
 const CommonHeader = ({title}: {title: string}) => {
-  const {navigation} = useNavigation<NavigationProps>();
+  const navigation = useNavigation<NavigationProps>();
   return (
     <View style={styles.container}>
       <Pressable

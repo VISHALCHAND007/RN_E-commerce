@@ -19,11 +19,14 @@ import {
   ShoppingBagIcon,
   ShoppingCartIcon,
 } from 'react-native-heroicons/outline';
+import { useAnimatedHeaderHeight } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 
 const {height, width} = Dimensions.get('window');
 const images = [bannerOne, bannerTwo, bannerThree];
 
-const Home = ({navigation}: NavigationProps) => {
+const Home = () => {
+  const navigation = useNavigation<NavigationProps>()
   //states
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -46,25 +49,27 @@ const Home = ({navigation}: NavigationProps) => {
       <TouchableOpacity
         style={styles.productView}
         onPress={() => navigation.navigate('ProductDetails', {_id: item?._id})}>
-        {item.isNew ? <View style={styles.imgContainer}>
-          <View style={styles.newtag}>
-            <Text style={styles.tagText}>New</Text>
+        {item.isNew ? (
+          <View style={styles.imgContainer}>
+            <View style={styles.newtag}>
+              <Text style={styles.tagText}>New</Text>
+            </View>
           </View>
-        </View> : null}
+        ) : null}
         <Image
-            source={{uri: item?.image}}
-            alt="Product Image"
-            style={styles.img}
-          />
+          source={{uri: item?.image}}
+          alt="Product Image"
+          style={styles.img}
+        />
         <Text style={styles.textView}>{item.title}</Text>
         <View style={styles.rowContainer}>
           <View>
             <Text style={styles.priceText}>${item.price}</Text>
             <Text style={styles.cutPrice}>${item.previousPrice}</Text>
           </View>
-          <View style={styles.addToCartIcon}>
+          <TouchableOpacity style={styles.addToCartIcon} onPress={() => {}}>
             <ShoppingCartIcon size={20} color={colors.textBlack} />
-          </View>
+          </TouchableOpacity>
         </View>
       </TouchableOpacity>
     );
@@ -79,9 +84,7 @@ const Home = ({navigation}: NavigationProps) => {
       <Header />
       <View>
         {isLoading ? (
-          <View style={styles.indicator}>
-            <Loader />
-          </View>
+          <Loader />
         ) : (
           <FlatList
             data={products}
@@ -152,11 +155,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     paddingVertical: 2, // Add some vertical padding for better appearance
     borderRadius: 4, // Optional: Add some border-radius for a rounded look
-    zIndex: 1
+    zIndex: 1,
   },
   tagText: {
     color: colors.defWhite,
-    fontSize: 12
+    fontSize: 12,
   },
   bannerImg: {
     width: '100%',
@@ -190,7 +193,7 @@ const styles = StyleSheet.create({
     textDecorationLine: 'line-through',
   },
   addToCartIcon: {
-    paddingVertical: 5,
+    paddingVertical: 7,
     paddingHorizontal: 10,
     backgroundColor: colors.designColor,
     justifyContent: 'center',

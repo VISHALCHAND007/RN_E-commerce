@@ -10,10 +10,12 @@ import React from 'react';
 import {introPng} from '../assets/index';
 import {colors} from '../constants';
 import {NavigationProps} from '../navigation/StackNavigation';
+import { useNavigation } from '@react-navigation/native';
 
 const {height} = Dimensions.get('window');
 
-const Intro = ({navigation}: NavigationProps) => {
+const Intro = () => {
+  const navigation = useNavigation<NavigationProps>()
   return (
     <View style={styles.container}>
       {/* Top */}
