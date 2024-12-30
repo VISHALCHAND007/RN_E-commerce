@@ -13,6 +13,9 @@ import {colors, URL} from '../constants';
 import {Product} from '../constants/type';
 import Loader from '../components/Loader';
 import { ArrowRightIcon, XMarkIcon } from 'react-native-heroicons/outline';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../redux/slice/productSlice';
+import Toast from 'react-native-toast-message';
 
 type ProductDetailsProps = NativeStackScreenProps<
   AuthStackItemList,
@@ -23,6 +26,7 @@ const {height, width} = Dimensions.get('window');
 
 const ProductDetails = ({navigation, route}: ProductDetailsProps) => {
   const {_id} = route?.params;
+  const dispatch = useDispatch();
   //states
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -75,7 +79,16 @@ const ProductDetails = ({navigation, route}: ProductDetailsProps) => {
                 <Text style={styles.priceText}>${product?.price}</Text>
                 <Text style={styles.cutPrice}>${product?.previousPrice}</Text>
               </View>
-              <TouchableOpacity style={styles.cartContainer}>
+              <TouchableOpacity style={styles.cartContainer} onPress={() => {
+                  dispatch(addToCart(product),
+                  Toast.show({
+                    text1: `${product.title} added successfully.`,
+                    type: 'success', 
+                    position: 'bottom'
+                  }) 
+                )
+              }
+              }>
                 <Text style={styles.cartText}>Add to cart</Text>
                 <ArrowRightIcon size={20}/>
               </TouchableOpacity>

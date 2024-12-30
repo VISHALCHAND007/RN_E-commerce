@@ -36,7 +36,7 @@ const SideMenu: React.FC<DrawerContentComponentProps> = ({navigation}) => {
           <TouchableOpacity
             key={index}
             style={style.drawerItem}
-            onPress={() => nav.navigate(screen.title)}>
+            onPress={() => (nav.navigate(screen.title))}>
             <Text style={style.drawerItexTxt}>{screen.title}</Text>
           </TouchableOpacity>
         </View>

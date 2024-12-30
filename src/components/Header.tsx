@@ -12,13 +12,15 @@ import {colors} from '../constants';
 import {logo} from '../assets';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationProps} from '../navigation/StackNavigation';
-import { HeaderProps } from '../navigation/DrawerNavigator';
-
-
+import {HeaderProps} from '../navigation/DrawerNavigator';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../redux/store/productStore';
 
 const Header = () => {
   const navigation = useNavigation<NavigationProps>();
   const drawerNavigation = useNavigation<HeaderProps>();
+  const {productData} = useSelector((state: RootState) => state.product);
+
   return (
     <SafeAreaView>
       <View style={styles.container}>
@@ -37,7 +39,9 @@ const Header = () => {
           onPress={() => navigation.navigate('Cart')}>
           <ShoppingCartIcon color={colors.textBlack} size={22} />
           <View style={styles.cartCount}>
-            <Text style={styles.cartText}>0</Text>
+            <Text style={styles.cartText}>
+              {productData.length > 0 ? productData.length : 0}
+            </Text>
           </View>
         </Pressable>
       </View>

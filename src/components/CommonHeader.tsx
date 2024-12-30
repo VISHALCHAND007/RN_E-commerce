@@ -5,9 +5,12 @@ import {ArrowLeftIcon, ShoppingCartIcon} from 'react-native-heroicons/outline';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationProps} from '../navigation/StackNavigation';
 import {logo} from '../assets';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store/productStore';
 
 const CommonHeader = ({title}: {title: string}) => {
   const navigation = useNavigation<NavigationProps>();
+  const {productData} = useSelector((state: RootState) => state.product)
   return (
     <View style={styles.container}>
       <Pressable
@@ -24,7 +27,9 @@ const CommonHeader = ({title}: {title: string}) => {
       <Pressable onPress={() => navigation.navigate('Cart')}>
         <ShoppingCartIcon style={styles.cartIcon} />
         <View style={styles.cartCount}>
-          <Text style={styles.cartText}>0</Text>
+          <Text style={styles.cartText}>
+            {productData.length > 0 ? productData.length : 0}
+          </Text>
         </View>
       </Pressable>
     </View>

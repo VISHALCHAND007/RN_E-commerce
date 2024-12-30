@@ -15,17 +15,18 @@ import {Product} from '../constants/type';
 import Carousel from 'react-native-reanimated-carousel';
 import {bannerOne, bannerThree, bannerTwo} from '../assets';
 import Loader from '../components/Loader';
-import {
-  ShoppingCartIcon,
-} from 'react-native-heroicons/outline';
-import { useAnimatedHeaderHeight } from '@react-navigation/native-stack';
-import { useNavigation } from '@react-navigation/native';
+import {ShoppingCartIcon} from 'react-native-heroicons/outline';
+import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {addToCart} from '../redux/slice/productSlice';
+import Toast from 'react-native-toast-message';
 
 const {height, width} = Dimensions.get('window');
 const images = [bannerOne, bannerTwo, bannerThree];
 
 const Home = () => {
-  const navigation = useNavigation<NavigationProps>()
+  const dispatcher = useDispatch();
+  const navigation = useNavigation<NavigationProps>();
   //states
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -66,7 +67,18 @@ const Home = () => {
             <Text style={styles.priceText}>${item.price}</Text>
             <Text style={styles.cutPrice}>${item.previousPrice}</Text>
           </View>
-          <TouchableOpacity style={styles.addToCartIcon} onPress={() => {}}>
+          <TouchableOpacity
+            style={styles.addToCartIcon}
+            onPress={() => {
+              dispatcher(
+                addToCart(item),
+                Toast.show({
+                  type: 'success',
+                  text1: `${item.title} added successfully.`,
+                  position: 'bottom'
+                }),
+              );
+            }}>
             <ShoppingCartIcon size={20} color={colors.textBlack} />
           </TouchableOpacity>
         </View>
