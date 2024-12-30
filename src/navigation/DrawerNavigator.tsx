@@ -1,25 +1,29 @@
 import {View, Text} from 'react-native';
 import React from 'react';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {
+  createDrawerNavigator,
+  DrawerNavigationProp,
+} from '@react-navigation/drawer';
 import StackNavigation from './StackNavigation';
 import SideMenu from '../components/SideMenu';
 
 export type DrawerItemList = {
-  StackScreen: undefined
-}
+  StackScreen: undefined;
+  SideMenu: undefined;
+};
 
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator<DrawerItemList>();
 
-
+export type HeaderProps = DrawerNavigationProp<DrawerItemList>;
 
 const DrawerNavigator = () => {
   return (
     <Drawer.Navigator
-      drawerContent={() => <SideMenu />}
+      drawerContent={props => <SideMenu {...props} />}
       screenOptions={{
         headerShown: false,
       }}>
-      <Drawer.Screen name="StackScreens" component={StackNavigation} />
+      <Drawer.Screen name="StackScreen" component={StackNavigation} />
     </Drawer.Navigator>
   );
 };

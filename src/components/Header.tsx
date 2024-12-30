@@ -10,13 +10,11 @@ import React from 'react';
 import {Bars4Icon, ShoppingCartIcon} from 'react-native-heroicons/outline';
 import {colors} from '../constants';
 import {logo} from '../assets';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {DrawerItemList} from '../navigation/DrawerNavigator';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationProps} from '../navigation/StackNavigation';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { HeaderProps } from '../navigation/DrawerNavigator';
 
-type HeaderProps = DrawerNavigationProp<DrawerItemList>;
+
 
 const Header = () => {
   const navigation = useNavigation<NavigationProps>();

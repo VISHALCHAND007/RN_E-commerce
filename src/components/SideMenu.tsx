@@ -1,9 +1,17 @@
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Pressable,
+} from 'react-native';
 import React from 'react';
 import {colors} from '../constants';
-import {ArrowLeftIcon} from 'react-native-heroicons/outline';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationProps} from '../navigation/StackNavigation';
+import {XMarkIcon} from 'react-native-heroicons/outline';
+import {HeaderProps} from '../navigation/DrawerNavigator';
+import { DrawerContentComponentProps } from '@react-navigation/drawer';
 
 const screens = [
   {title: 'Home'},
@@ -13,18 +21,22 @@ const screens = [
   {title: 'Address'},
 ];
 
-const SideMenu = () => {
-  const navigation = useNavigation<NavigationProps>();
-
+const SideMenu: React.FC<DrawerContentComponentProps> = ({navigation}) => {
+  const nav = useNavigation<NavigationProps>();
   return (
     <View style={style.container}>
-      <Text style={style.titleTxt}>Click to select screen</Text>
+      <View style={style.titleContainer}>
+        <Text style={style.titleTxt}>Click to select screen</Text>
+        <Pressable onPress={() => navigation.closeDrawer()}>
+          <XMarkIcon size={25} color={'red'} />
+        </Pressable>
+      </View>
       {screens.map((screen, index) => (
         <View style={style.alignCenter}>
           <TouchableOpacity
             key={index}
             style={style.drawerItem}
-            onPress={() => navigation.navigate(screen.title)}>
+            onPress={() => nav.navigate(screen.title)}>
             <Text style={style.drawerItexTxt}>{screen.title}</Text>
           </TouchableOpacity>
         </View>
@@ -39,8 +51,11 @@ const style = StyleSheet.create({
     paddingHorizontal: 18,
     paddingVertical: 20,
   },
+  titleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   titleTxt: {
-    textAlign: 'center',
     color: 'gray',
     fontWeight: '600',
     fontSize: 15,
